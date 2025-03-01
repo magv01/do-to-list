@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
 }
 
 .container {
@@ -13,9 +14,10 @@
 }
 input{
     width: 80%;
-    padding: 6px 2px;
+    padding: 5px 2px;
     margin-top: 20px;
     margin-bottom: 20px;
+    font-size: 16px;
 }
 
 .todo-list {
@@ -23,7 +25,6 @@ input{
 }
 
 li {
-    clear: right;
     display: flex;
     justify-content: space-between;    
     border-top: 1px solid rgb(124, 125, 129);
@@ -51,7 +52,8 @@ button {
 
 .addBtn{
     border: 1px solid rgb(153, 152, 156);
-    padding:5px;
+    padding:8px;
+    border-radius: 5px;
 }
 button:hover{
     color:blue;
