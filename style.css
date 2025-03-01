@@ -24,13 +24,55 @@ input{
 
 li {
     clear: right;
-    margin: 5px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;    
+    border-top: 1px solid rgb(124, 125, 129);
 
+}
+
+li:nth-child(2n) {
+    background-color: #dedfe0;
+}
+
+li:last-child{
+    border-bottom: 1px solid rgb(124, 125, 129);
+}
+
+span{
+    max-width: 30%;
 }
 
 button {
     margin-left: 10px;
     padding: 5px;
+    border: none;
+    background-color: transparent;
 }
+
+.addBtn{
+    border: 1px solid rgb(153, 152, 156);
+    padding:5px;
+}
+button:hover{
+    color:blue;
+}
+
+@media only screen and (max-width: 500px) {
+    .container{
+        width: 80vw;
+    }
+
+    input{
+        width: 70%;
+    }
+  }
+
+  @media only screen and (max-width: 390px) {
+    .container{
+        width: 80vw;
+    }
+
+    input{
+        width: 65%;
+    }
+  }
