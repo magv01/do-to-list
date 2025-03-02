@@ -59,6 +59,10 @@ button:hover{
     color:blue;
 }
 
+.line_through{
+    text-decoration: line-through;
+}
+
 @media only screen and (max-width: 500px) {
     .container{
         width: 80vw;

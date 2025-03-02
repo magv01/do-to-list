@@ -3,23 +3,35 @@ const input = document.getElementById("taskInput");
 const addBtn = document.getElementById("addBtn");
 const toDoList = document.getElementById("toDoList");
 
+//obtains tasks from local storage
+const existingTasks = JSON.parse(localStorage.getItem("toDo"));
 
+//renders the task on the page
+if(existingTasks){
+    existingTasks.forEach(task => addTask(task));
+}
 
-
-addBtn.addEventListener("click", (e) => {
+addBtn.addEventListener("click", () => {
     addTask()
 });
 
 
-function addTask(e){
+function addTask(taskData = null){
     const toDoTask = input.value.trim();
-    if (toDoTask !== null && toDoTask.trim() !== ""){
-
+    // Check if the input is valid or if we're loading a task from localStorage
+    if (toDoTask !== ""|| taskData){
+        // Use the text from localStorage or input value
+        const taskText = taskData ? taskData.text : toDoTask;  
     
     const li = document.createElement("li");
     const span = document.createElement("span");
     const div= document.createElement("div");
-    span.textContent= input.value;
+    span.textContent= taskText;
+
+      // If the task is marked as done in localStorage, add the 'line_through' class
+      if (taskData && taskData.done) {
+        span.classList.add("line_through");
+    }
 
     const editBtn = document.createElement("button");
     editBtn.innerHTML = ("&#9998");
@@ -41,6 +53,7 @@ function addTask(e){
     toDoList.appendChild(li);
 
     input.value = "";
+    updateLS();
 
 }
 else{
@@ -52,13 +65,37 @@ function editTask(span){
     if (newTask !== null && newTask.trim() !== "") {
         span.textContent = newTask.trim();
     }
+    updateLS();
 }
 
 function deleteTask(task){
     toDoList.removeChild(task);
+    updateLS();
+
 }
 
 function doneTask(span){
-    span.style.setProperty("text-decoration", "line-through");
+    span.classList.toggle("line_through");
+    updateLS();
 
 }
+
+//update Local Storage
+
+function updateLS() {
+    const allTasks = document.querySelectorAll("li");
+
+    const tasks = [];
+    allTasks.forEach(task => {
+        // Grab the text content of the <span> element within each <li>
+        const taskText = task.querySelector("span");
+        tasks.push({ 
+            text: taskText.textContent,
+            done:  taskText.classList.contains("line_through")
+        });
+    });
+    console.log(tasks);
+
+    localStorage.setItem("toDo", JSON.stringify(tasks));
+
+};
